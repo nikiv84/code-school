@@ -3,3 +3,74 @@ $grid-breakpoints: (xs: 0,
   md: 768px,
   lg: 992px,
   xl: 1200px);
+
+$global-dark-base: #3f5161;
+$global-dark-base-alt: #1f273e;
+$brand-highlight-light-theme: #427cac;
+$brand-highlight-dark-theme: #91c8f6;
+$global-light-base: #eff4f9;
+$background: #ebebeb;
+$alt-background: #f7f8fa;
+$dark-theme-top: #2c4e6c;
+$dark-theme-top-alt: #142e44;
+$dark-theme-bottom: #9ec7d8;
+$light-theme-top: #a9c6de;
+$light-theme-bottom: #e7ecf0;
+
+// Semantic Colors
+$dark-theme-negative: #ff8888;
+$dark-theme-critical: #fabd64;
+$dark-theme-positive: #abe2ab;
+$dark-theme-neutral: #d3d7d9;
+$dark-theme-black: #1d2a36;
+
+$light-theme-negative: #bb0000;
+$light-theme-critical: #e78c07;
+$light-theme-positive: #2b7d2b;
+$light-theme-neutral: #5e696e;
+
+// Accent Colors
+$tangerine-yellow: #e09d00;
+$persimmon-red: #e6600d;
+$sunset-red: #c14646;
+$dark-purple: #ab218e;
+$danube-blue: #678bc7;
+$pacific-blue: #0092d1;
+$java-green: #1a9898;
+$olive-drab-green: #759421;
+
+// Basic palette
+$blue: $brand-highlight-light-theme !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: $light-theme-negative !default;
+$orange: #fd7e14 !default;
+$yellow: $light-theme-critical !default;
+$green: $light-theme-positive !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+$white: #fff !default;
+$blackish: #121215 !default;
+$black: #000 !default;
+$grey: #c3c3c3 !default;
+
+// Transitions
+$animation-default: all 0.15s ease-in-out;
+$animation-alt: all 0.3s ease-in-out;
+
+// Box-shadow
+$box-shadow-default: 0 0 28px rgba(28, 50, 92, 0.075),
+0 0 20px rgba(28, 50, 92, 0.075);
+$box-shadow-alt: 5px 5px 36px rgba(28, 50, 92, 0.1),
+5px 5px 32px rgba(28, 50, 92, 0.1);
+
+// Borders
+$border-default: 1px solid rgba(53, 74, 95, 0.25);
+$border-lighter: 1px solid rgba(53, 74, 95, 0.1);
+
+// Gradients
+$dark-blue-gradient: linear-gradient(to bottom, rgba(63, 81, 97, 1) 0%, rgb(35, 62, 87) 100%);
+$teal-gradient: linear-gradient(to bottom, rgba(32, 201, 150, 1) 0%, rgb(26, 163, 122) 100%);
+$pacific-blue-gradient: linear-gradient(to bottom, rgba(0, 146, 209, 1) 0%, rgb(16, 126, 173) 100%);
+$danube-blue-gradient: linear-gradient(to bottom, rgba(103, 138, 199, 1) 0%, rgb(67, 114, 196) 100%);
