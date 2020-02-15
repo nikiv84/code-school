@@ -1,0 +1,13 @@
+@import "variables";
+
+.dashboard-container {
+  padding: 1rem;
+}
+
+.main-title {
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  font-size: 3rem;
+  margin: 2rem 0;
+  color: $dark-theme-black;
+}
