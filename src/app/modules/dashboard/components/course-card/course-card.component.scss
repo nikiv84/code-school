@@ -1,0 +1,106 @@
+@import "variables";
+
+:host {
+  $repeat: 10;
+  padding: 0.5rem;
+
+  &:nth-of-type(4n+1) .course-card-container a {
+    background-color: $teal;
+    background: $teal-gradient;
+    color: $dark-theme-black;
+  }
+
+  &:nth-of-type(4n+2) .course-card-container a {
+    background-color: $global-dark-base;
+    background: $dark-blue-gradient;
+    color: $light-theme-bottom;
+  }
+
+  &:nth-of-type(4n+3) .course-card-container a {
+    background-color: $pacific-blue;
+    background: $pacific-blue-gradient;
+    color: $dark-theme-black;
+  }
+
+  &:nth-of-type(4n) .course-card-container a {
+    background-color: $danube-blue;
+    background: $danube-blue-gradient;
+    color: $dark-theme-black;
+  }
+
+  &:first-of-type .course-card-container {
+    margin-left: 0;
+  }
+
+  &:last-of-type .course-card-container {
+    margin-right: 0;
+  }
+}
+
+.course-card-container {
+  padding: 1rem;
+  margin: 0;
+
+  a {
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 100%;
+    height: 12rem;
+    padding: 1rem;
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-shadow: $box-shadow-default;
+    transition: $animation-default;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('src/assets/img/exam.svg');
+      background-size: 4rem;
+      background-repeat: no-repeat;
+      background-position: 90% 77.5%;
+      opacity: 0.85;
+    }
+
+    &:hover {
+      top: -0.1rem;
+      left: -0.075rem;
+      box-shadow: $box-shadow-alt;
+    }
+
+    .course-card--top {
+
+      h2,
+      h3 {
+        margin: 0;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+
+    .course-card--bottom {
+      h3 {
+        margin: 0;
+        line-height: 1;
+      }
+
+      span {
+        display: block;
+        line-height: 1;
+        font-size: 3rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
