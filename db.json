@@ -1,0 +1,91 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "firstName": "Everett",
+      "lastName": "Shelton",
+      "email": "everett.shelton@example.com",
+      "phone": ""
+    },
+    {
+      "id": 2,
+      "firstName": "Debbie",
+      "lastName": "Lane",
+      "email": "debbie.lane@example.com",
+      "phone": "(808)-744-3610"
+    },
+    {
+      "id": 3,
+      "firstName": "Micheal",
+      "lastName": "Franklin",
+      "email": "micheal.franklin@example.com",
+      "phone": "(958)-339-0095"
+    },
+    {
+      "id": 4,
+      "firstName": "Tracy",
+      "lastName": "Adams",
+      "email": "tracy.adams@example.com",
+      "phone": "(511)-269-9453"
+    }
+  ],
+  "courses": [
+    {
+      "id": 101,
+      "name": "React 101",
+      "date": "2020-02-24T00:00:00Z"
+    },
+    {
+      "id": 201,
+      "name": "Angular 101",
+      "date": "2020-03-13T00:00:00Z"
+    },
+    {
+      "id": 301,
+      "name": "Java Spring 101",
+      "date": "2020-03-21T00:00:00Z"
+    }
+  ],
+  "enrollment": [
+    {
+      "id": 1,
+      "studentId": 1,
+      "courseId": 101
+    },
+    {
+      "id": 2,
+      "studentId": 1,
+      "courseId": 201
+    },
+    {
+      "id": 3,
+      "studentId": 1,
+      "courseId": 301
+    },
+    {
+      "id": 4,
+      "studentId": 2,
+      "courseId": 301
+    },
+    {
+      "id": 5,
+      "studentId": 3,
+      "courseId": 201
+    },
+    {
+      "id": 6,
+      "studentId": 2,
+      "courseId": 101
+    },
+    {
+      "id": 7,
+      "studentId": 4,
+      "courseId": 301
+    },
+    {
+      "id": 8,
+      "studentId": 3,
+      "courseId": 201
+    }
+  ]
+}
