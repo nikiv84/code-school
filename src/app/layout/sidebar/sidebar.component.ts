@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
 
   public readonly routes: AppRoute[] = [
     { path: '/dashboard', icon: 'dashboard', title: 'Dashboard' },
-    { path: '/courses', icon: 'class', title: 'Courses' },
+    { path: '/course', icon: 'class', title: 'Courses' },
     { path: '/students', icon: 'supervised_user_circle', title: 'Students' }
   ];
 
