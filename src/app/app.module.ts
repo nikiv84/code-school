@@ -5,13 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { SharedModule } from './shared/shared.module';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

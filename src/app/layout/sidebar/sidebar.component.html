@@ -1,0 +1,16 @@
+<div class="sidebar">
+  <div class="sidebar-container">
+    <div class="app-logo">
+      <a [routerLink]="['/']" title="Logo">
+        <img src="assets/img/logo.svg" width="20" alt="Logo" />
+      </a>
+    </div>
+
+    <ng-container *ngFor="let route of routes">
+      <a [routerLink]="[route.path]" routerLinkActive="active" title="route.title">
+        <mat-icon aria-hidden=" false" aria-label="'route.title'">{{route.icon}}</mat-icon>
+      </a>
+    </ng-container>
+
+  </div>
+</div>
