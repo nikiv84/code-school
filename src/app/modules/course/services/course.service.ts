@@ -97,4 +97,14 @@ export class CourseService {
       );
   }
 
+  public removeCourse(courseId: string): Observable<{}> {
+    const deleteUrl = `${this.baseUrl}/courses/${courseId}`;
+    return this.httpClient.delete<Course>(deleteUrl);
+  }
+
+  public updateCourse(courseId: string, course: { name: string, date: Date }) {
+    const url = `${this.baseUrl}/courses/${courseId}`;
+    return this.httpClient.put(url, course);
+  }
+
 }

@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-12">
     <h1 class="main-title">Courses</h1>
-    <h2 class="sub-title">{{(courses$ | async)?.length || "..."}} courses</h2>
+    <h2 class="sub-title">{{getSubtitle((courses$ | async))}}</h2>
   </div>
 </div>
 <div class="row">
   <div class="col-12">
-    <app-courses-table [courses]="courses$ | async" *ngIf="(courses$ | async); else loading;">
+    <app-courses-table [courses]="courses$ | async" *ngIf="(courses$ | async); else loading;"
+      (removeCourse)="removeCourseDialog($event)" (editCourse)="editCourseDialog($event)">
     </app-courses-table>
   </div>
 </div>
