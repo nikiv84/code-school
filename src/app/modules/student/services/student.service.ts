@@ -35,16 +35,16 @@ export class StudentService {
       );
   }
 
-  public getCoursesForStudent(studentId: string): Observable<CourseStudent[]> {
-    const url = `${this.baseUrl}/enrollment?studentId=${studentId}`;
-    return this.httpClient.get<CourseStudent[]>(url);
-  }
-
   public getCourseCountForStudent(studentId: string): Observable<number> {
     return this.getCoursesForStudent(studentId)
       .pipe(
         map((studentCourses: CourseStudent[]) => studentCourses.length)
       );
+  }
+
+  public getCoursesForStudent(studentId: string): Observable<CourseStudent[]> {
+    const url = `${this.baseUrl}/enrollment?studentId=${studentId}`;
+    return this.httpClient.get<CourseStudent[]>(url);
   }
 
   public removeStudent(studentId: string): Observable<{}> {
