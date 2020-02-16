@@ -1,4 +1,6 @@
-<app-sidebar></app-sidebar>
-<main class="main-container container-fluid" role="main">
-  <router-outlet></router-outlet>
-</main>
+<div [class.dark-theme]="isDarkTheme" class="main-wrapper">
+  <app-sidebar (toggleTheme)="changeTheme()"></app-sidebar>
+  <main class="main-container container-fluid" role="main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,3 +1,13 @@
+@import "variables";
+
+.main-wrapper {
+  height: 100%;
+
+  &.dark-theme {
+    background: $dark-theme-bg;
+  }
+}
+
 .main-container {
   position: relative;
   left: 60px;

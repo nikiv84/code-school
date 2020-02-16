@@ -1,0 +1,7 @@
+@import './app/modules/course/components/course/course.component';
+@import './app/modules/course/components/course-table/course-table.component.scss';
+
+@mixin component-themes($theme) {
+  @include course-theme($theme);
+  @include course-table-theme($theme);
+}

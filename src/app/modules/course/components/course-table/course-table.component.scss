@@ -38,3 +38,19 @@ td.mat-footer-cell {
     }
   }
 }
+
+@mixin course-table-theme($theme) {
+  .mat-row {
+    &:hover {
+      background: $dark-theme-bg !important;
+    }
+  }
+
+  .mat-header-row {
+    background: $blackish !important;
+
+    .mat-header-cell {
+      color: $alt-background !important;
+    }
+  }
+}

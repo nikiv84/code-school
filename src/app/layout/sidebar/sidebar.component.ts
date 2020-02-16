@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 export class AppRoute {
   constructor(
@@ -14,6 +14,7 @@ export class AppRoute {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  @Output() toggleTheme = new EventEmitter();
 
   public readonly routes: AppRoute[] = [
     { path: '/dashboard', icon: 'dashboard', title: 'Dashboard' },
@@ -24,6 +25,10 @@ export class SidebarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onToggleTheme(): void {
+    this.toggleTheme.emit();
   }
 
 }
