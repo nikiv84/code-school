@@ -4,7 +4,7 @@ import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { map, mergeAll, switchMap, tap } from 'rxjs/operators';
 import { CourseStudent } from './../../../models/course-student.model';
 import { Course, CourseWithStudents } from './../../../models/course.model';
-import { Student } from './../../../models/student.model';
+import { Student, StudentWithCourses } from './../../../models/student.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,9 +39,37 @@ export class CourseService {
     return this.httpClient.get<CourseStudent[]>(url);
   }
 
-  public getAllStudents(): Observable<Student[]> {
+  // public getAllStudents(): Observable<Student[]> {
+  //   const url = `${this.baseUrl}/students`;
+  //   return this.httpClient.get<Student[]>(url);
+  // }
+
+  public getAllStudents(): Observable<StudentWithCourses[]> {
     const url = `${this.baseUrl}/students`;
-    return this.httpClient.get<Student[]>(url);
+    return this.httpClient.get<Student[]>(url)
+      .pipe(
+        switchMap((students: Student[]) => {
+          return !students.length ? of([]) : forkJoin(students.map((student: Student) =>
+            this.getCourseCountForStudent(student.id)))
+            .pipe(
+              map((numberOfCourses: number[]) => students.map((student: Student, index: number) =>
+                new StudentWithCourses(student.id, student.firstName,
+                  student.lastName, student.email, numberOfCourses[index], student.phone)))
+            );
+        }),
+      );
+  }
+
+  public getCourseCountForStudent(studentId: string): Observable<number> {
+    return this.getCoursesForStudent(studentId)
+      .pipe(
+        map((studentCourses: CourseStudent[]) => studentCourses.length)
+      );
+  }
+
+  public getCoursesForStudent(studentId: string): Observable<CourseStudent[]> {
+    const url = `${this.baseUrl}/enrollment?studentId=${studentId}`;
+    return this.httpClient.get<CourseStudent[]>(url);
   }
 
   public getStudent(studentId: string): Observable<Student> {
@@ -92,6 +120,11 @@ export class CourseService {
       );
   }
 
+  public addCourse(course: Course): Observable<{}> {
+    const url = `${this.baseUrl}/courses`;
+    return this.httpClient.post<Course>(url, course);
+  }
+
   public removeStudentFromCourse(courseId: string, studentId: string): Observable<{}> {
     return this.getEnrollment(courseId, studentId)
       .pipe(
@@ -103,8 +136,8 @@ export class CourseService {
   }
 
   public removeCourse(courseId: string): Observable<{}> {
-    const deleteUrl = `${this.baseUrl}/courses/${courseId}`;
-    return this.httpClient.delete<Course>(deleteUrl);
+    const url = `${this.baseUrl}/courses/${courseId}`;
+    return this.httpClient.delete<Course>(url);
   }
 
   public updateCourse(courseId: string, course: { name: string, date: Date }): Observable<{}> {

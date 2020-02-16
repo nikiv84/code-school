@@ -36,6 +36,17 @@ export class CoursesComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(AddCourseDialogComponent, {
       width: '440px'
     });
+
+    dialogRef.afterClosed().subscribe((course: Course) => {
+      if (course) {
+        this.courseService.addCourse(course)
+          .pipe(
+            takeUntil(this.unsubscribe),
+            concatMap(() => this.courseService.getCoursesWithStudents())
+          )
+          .subscribe();
+      }
+    });
   }
 
   public removeCourseDialog(course: Course): void {
