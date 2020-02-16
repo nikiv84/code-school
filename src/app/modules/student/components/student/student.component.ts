@@ -4,9 +4,9 @@ import { Observable, Subject } from 'rxjs';
 import { concatMap, takeUntil } from 'rxjs/operators';
 import { StudentWithCourses } from 'src/app/models/student.model';
 import { Student } from './../../../../models/student.model';
+import { RemoveDialogComponent } from './../../../../shared/components/remove-dialog/remove-dialog.component';
 import { StudentService } from './../../services/student.service';
 import { AddStudentDialogComponent } from './../add-student-dialog/add-student-dialog.component';
-import { DialogComponent } from './../dialog/dialog.component';
 import { EditStudentDialogComponent } from './../edit-student-dialog/edit-student-dialog.component';
 
 @Component({
@@ -83,10 +83,11 @@ export class StudentComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(student: Student): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(RemoveDialogComponent, {
       width: '440px',
       data: {
-        student
+        entityType: 'student',
+        message: `${student.firstName} ${student.lastName}`
       }
     });
 
