@@ -32,10 +32,10 @@
   <ng-container matColumnDef="Manage">
     <th mat-header-cell *matHeaderCellDef> Manage </th>
     <td mat-cell *matCellDef="let student;" class="icon-container">
-      <mat-icon aria-hidden=" false" attr.aria-label="Remove Student" title="Remove Student"
-        (click)="onRemoveStudent(student)">delete_outline</mat-icon>
-      <mat-icon aria-hidden=" false" attr.aria-label="Edit Student" title="Edit Student"
+      <mat-icon aria-hidden="false" attr.aria-label="Edit Student" title="Edit Student"
         (click)="onEditStudent(student)">edit</mat-icon>
+      <mat-icon aria-hidden="false" attr.aria-label="Remove Student" title="Remove Student"
+        (click)="onRemoveStudent(student)">delete_outline</mat-icon>
     </td>
   </ng-container>
 
