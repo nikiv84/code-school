@@ -3,10 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { concatMap, takeUntil } from 'rxjs/operators';
-import { Course } from './../../../../models/course.model';
+import { Course, CourseWithStudents } from './../../../../models/course.model';
 import { Student } from './../../../../models/student.model';
 import { RemoveDialogComponent } from './../../../../shared/components/remove-dialog/remove-dialog.component';
 import { CourseService } from './../../services/course.service';
+import { AddStudentToCourseDialogComponent } from './../add-student-to-course-dialog/add-student-to-course-dialog.component';
 
 @Component({
   selector: 'app-course',
@@ -57,6 +58,27 @@ export class CourseComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((shouldRemove: boolean) => {
       if (shouldRemove) {
         this.removeStudentFromCourse(student.id);
+      }
+    });
+  }
+
+  public addStudentToCourseDialog(course: CourseWithStudents) {
+    const dialogRef = this.dialog.open(AddStudentToCourseDialogComponent, {
+      width: '440px',
+      data: {
+        name: course.name,
+        date: course.date
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((courseData: CourseWithStudents) => {
+      if (courseData) {
+        this.courseService.updateCourse(course.id, courseData)
+          .pipe(
+            takeUntil(this.unsubscribe),
+            concatMap(() => this.courseService.getCoursesWithStudents())
+          )
+          .subscribe();
       }
     });
   }

@@ -8,6 +8,7 @@ import { CourseRoutingModule } from './course-routing.module';
 import { CoursesComponent } from './components/courses/courses.component';
 import { CoursesTableComponent } from './components/courses-table/courses-table.component';
 import { EditCourseDialogComponent } from './components/edit-course-dialog/edit-course-dialog.component';
+import { AddStudentToCourseDialogComponent } from './components/add-student-to-course-dialog/add-student-to-course-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EditCourseDialogComponent } from './components/edit-course-dialog/edit-
     DialogComponent,
     CoursesComponent,
     CoursesTableComponent,
-    EditCourseDialogComponent
+    EditCourseDialogComponent,
+    AddStudentToCourseDialogComponent
   ],
   imports: [
     CommonModule,

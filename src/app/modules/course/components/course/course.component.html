@@ -5,7 +5,9 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-12">
+  <div class="col-12" *ngIf="(course$ | async) as course;">
+    <button mat-raised-button color="primary" (click)="addStudentToCourseDialog(course)" class="add-course-btn">Add
+      Student To Course</button>
     <app-course-table [students]="students$ | async" (removeStudent)="removeStudentDialog($event)"
       *ngIf="(students$ | async); else loading;">
     </app-course-table>
