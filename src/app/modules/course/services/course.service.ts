@@ -39,6 +39,11 @@ export class CourseService {
     return this.httpClient.get<CourseStudent[]>(url);
   }
 
+  public getAllStudents(): Observable<Student[]> {
+    const url = `${this.baseUrl}/students`;
+    return this.httpClient.get<Student[]>(url);
+  }
+
   public getStudent(studentId: string): Observable<Student> {
     const url = `${this.baseUrl}/students/${studentId}`;
     return this.httpClient.get<Student>(url);
@@ -102,9 +107,17 @@ export class CourseService {
     return this.httpClient.delete<Course>(deleteUrl);
   }
 
-  public updateCourse(courseId: string, course: { name: string, date: Date }) {
+  public updateCourse(courseId: string, course: { name: string, date: Date }): Observable<{}> {
     const url = `${this.baseUrl}/courses/${courseId}`;
     return this.httpClient.put(url, course);
   }
 
+  public updateEnrollment(courseId: string, studentId: string): Observable<{}> {
+    const url = `${this.baseUrl}/enrollment`;
+    return this.httpClient.post(url, { courseId, studentId });
+  }
+
+  public updateEnrollments(courseId: string, studentIds: string[]): Observable<{}> {
+    return forkJoin(studentIds.map((studentId: string) => this.updateEnrollment(courseId, studentId)));
+  }
 }

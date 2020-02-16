@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { concatMap, takeUntil } from 'rxjs/operators';
+import { concatMap, map, takeUntil, tap } from 'rxjs/operators';
 import { Course, CourseWithStudents } from './../../../../models/course.model';
 import { Student } from './../../../../models/student.model';
 import { RemoveDialogComponent } from './../../../../shared/components/remove-dialog/remove-dialog.component';
@@ -17,6 +17,8 @@ import { AddStudentToCourseDialogComponent } from './../add-student-to-course-di
 export class CourseComponent implements OnInit, OnDestroy {
   private courseId: string;
   public students$: Observable<Student[]>;
+  private studentsNotEnrolled: Student[];
+  private courseStudents: Student[];
   public course$: Observable<Course>;
   private unsubscribe: Subject<void> = new Subject();
 
@@ -30,7 +32,18 @@ export class CourseComponent implements OnInit, OnDestroy {
     this.courseId = this.route.snapshot.paramMap.get('courseId');
     this.course$ = this.courseService.getCourse(this.courseId);
     this.students$ = this.courseService.getStudentsAsObservable();
-    this.courseService.getCourseStudents(this.courseId).pipe(takeUntil(this.unsubscribe)).subscribe();
+    this.getCourseStudents().subscribe();
+  }
+
+  private getCourseStudents(): Observable<Student[]> {
+    return this.courseService.getCourseStudents(this.courseId)
+      .pipe(
+        takeUntil(this.unsubscribe),
+        tap((courseStudents: Student[]) => {
+          this.courseStudents = courseStudents;
+          this.getNotEnrolledStudents();
+        })
+      );
   }
 
   ngOnDestroy(): void {
@@ -38,11 +51,23 @@ export class CourseComponent implements OnInit, OnDestroy {
     this.unsubscribe.complete();
   }
 
+  private getNotEnrolledStudents(): void {
+    this.courseService.getAllStudents()
+      .pipe(
+        takeUntil(this.unsubscribe),
+        map((allStudents: Student[]) => {
+          const courseStudentsIds = new Set(this.courseStudents.map(({ id }) => id));
+          return allStudents.filter(({ id }) => !courseStudentsIds.has(id));
+        }),
+      )
+      .subscribe((students: Student[]) => this.studentsNotEnrolled = students);
+  }
+
   private removeStudentFromCourse(studentId: string) {
     this.courseService.removeStudentFromCourse(this.courseId, studentId)
       .pipe(
         takeUntil(this.unsubscribe),
-        concatMap(() => this.courseService.getCourseStudents(this.courseId))
+        concatMap(() => this.getCourseStudents())
       ).subscribe();
   }
 
@@ -67,16 +92,17 @@ export class CourseComponent implements OnInit, OnDestroy {
       width: '440px',
       data: {
         name: course.name,
-        date: course.date
+        date: course.date,
+        students: this.studentsNotEnrolled
       }
     });
 
-    dialogRef.afterClosed().subscribe((courseData: CourseWithStudents) => {
-      if (courseData) {
-        this.courseService.updateCourse(course.id, courseData)
+    dialogRef.afterClosed().subscribe((studentIds: string[]) => {
+      if (studentIds?.length) {
+        this.courseService.updateEnrollments(course.id, studentIds)
           .pipe(
             takeUntil(this.unsubscribe),
-            concatMap(() => this.courseService.getCoursesWithStudents())
+            concatMap(() => this.getCourseStudents())
           )
           .subscribe();
       }
