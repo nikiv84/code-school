@@ -20,7 +20,6 @@ table.mat-table {
   }
 }
 
-
 th.mat-header-cell,
 td.mat-cell,
 td.mat-footer-cell {
@@ -30,4 +29,24 @@ td.mat-footer-cell {
 .course-count-container {
   text-align: center;
   font-weight: 500;
+}
+
+.icon-container {
+  text-align: center;
+  cursor: pointer;
+  min-width: 120px;
+
+  .mat-icon {
+    transition: $animation-default;
+    margin: 0 0.5rem;
+    vertical-align: middle;
+
+    &:hover {
+      color: $light-theme-negative;
+
+      &:last-of-type {
+        color: $brand-highlight-light-theme;
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StudentWithCourses } from './../../../../models/student.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Student, StudentWithCourses } from './../../../../models/student.model';
 
 @Component({
   selector: 'app-student-table',
@@ -8,11 +8,22 @@ import { StudentWithCourses } from './../../../../models/student.model';
 })
 export class StudentTableComponent implements OnInit {
   @Input() students: StudentWithCourses[];
-  public displayedStudentColumns: string[] = ['Position', 'First Name', 'Last Name', 'E-mail', 'Phone', 'Courses'];
+  @Output() removeStudent = new EventEmitter<Student>();
+  @Output() editStudent = new EventEmitter<Student>();
+
+  public displayedStudentColumns: string[] = ['Position', 'First Name', 'Last Name', 'E-mail', 'Phone', 'Courses', 'Manage'];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onRemoveStudent(student: Student): void {
+    this.removeStudent.emit(student);
+  }
+
+  public onEditStudent(student: Student): void {
+    this.editStudent.emit(student);
   }
 
 }
