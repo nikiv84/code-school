@@ -5,6 +5,7 @@ import { concatMap, takeUntil } from 'rxjs/operators';
 import { Course, CourseWithStudents } from './../../../../models/course.model';
 import { RemoveDialogComponent } from './../../../../shared/components/remove-dialog/remove-dialog.component';
 import { CourseService } from './../../services/course.service';
+import { AddCourseDialogComponent } from './../add-course-dialog/add-course-dialog.component';
 import { EditCourseDialogComponent } from './../edit-course-dialog/edit-course-dialog.component';
 
 @Component({
@@ -29,6 +30,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+  }
+
+  public addCourseDialog(): void {
+    const dialogRef = this.dialog.open(AddCourseDialogComponent, {
+      width: '440px'
+    });
   }
 
   public removeCourseDialog(course: Course): void {

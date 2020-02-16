@@ -6,6 +6,7 @@
 </div>
 <div class="row">
   <div class="col-12">
+    <button mat-raised-button color="primary" (click)="addCourseDialog()" class="add-student-btn">Add Course</button>
     <app-courses-table [courses]="courses$ | async" *ngIf="(courses$ | async); else loading;"
       (removeCourse)="removeCourseDialog($event)" (editCourse)="editCourseDialog($event)">
     </app-courses-table>

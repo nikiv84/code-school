@@ -10,6 +10,7 @@ import { CoursesTableComponent } from './components/courses-table/courses-table.
 import { EditCourseDialogComponent } from './components/edit-course-dialog/edit-course-dialog.component';
 import { AddStudentToCourseDialogComponent } from './components/add-student-to-course-dialog/add-student-to-course-dialog.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
+import { AddCourseDialogComponent } from './components/add-course-dialog/add-course-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { StudentListComponent } from './components/student-list/student-list.com
     CoursesTableComponent,
     EditCourseDialogComponent,
     AddStudentToCourseDialogComponent,
-    StudentListComponent
+    StudentListComponent,
+    AddCourseDialogComponent
   ],
   imports: [
     CommonModule,
