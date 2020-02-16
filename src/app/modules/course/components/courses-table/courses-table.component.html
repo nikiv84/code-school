@@ -22,10 +22,13 @@
   <ng-container matColumnDef="Manage">
     <th mat-header-cell *matHeaderCellDef> Manage </th>
     <td mat-cell *matCellDef="let course;" class="icon-container">
-      <mat-icon aria-hidden=" false" attr.aria-label="Remove Student" title="Remove Course"
-        (click)="onRemoveCourse(course)">delete_outline</mat-icon>
-      <mat-icon aria-hidden=" false" attr.aria-label="Edit Student" title="Edit Course" (click)="onEditCourse(course)">
+      <mat-icon aria-hidden="false" attr.aria-label="View Course" title="View Course"
+        [routerLink]="['/course', course.id]">
+        remove_red_eye</mat-icon>
+      <mat-icon aria-hidden="false" attr.aria-label="Edit Student" title="Edit Course" (click)="onEditCourse(course)">
         edit</mat-icon>
+      <mat-icon aria-hidden="false" attr.aria-label="Remove Student" title="Remove Course"
+        (click)="onRemoveCourse(course)">delete_outline</mat-icon>
     </td>
   </ng-container>
 

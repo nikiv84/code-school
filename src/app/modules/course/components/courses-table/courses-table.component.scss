@@ -42,10 +42,10 @@ td.mat-footer-cell {
     vertical-align: middle;
 
     &:hover {
-      color: $light-theme-negative;
+      color: $brand-highlight-light-theme;
 
       &:last-of-type {
-        color: $brand-highlight-light-theme;
+        color: $light-theme-negative;
       }
     }
   }
