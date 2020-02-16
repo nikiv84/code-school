@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule
   ],
   exports: [
     MatIconModule,
@@ -31,7 +33,8 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }
