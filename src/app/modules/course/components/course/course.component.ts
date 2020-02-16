@@ -5,8 +5,8 @@ import { Observable, Subject } from 'rxjs';
 import { concatMap, takeUntil } from 'rxjs/operators';
 import { Course } from './../../../../models/course.model';
 import { Student } from './../../../../models/student.model';
+import { RemoveDialogComponent } from './../../../../shared/components/remove-dialog/remove-dialog.component';
 import { CourseService } from './../../services/course.service';
-import { DialogComponent } from './../dialog/dialog.component';
 
 @Component({
   selector: 'app-course',
@@ -45,11 +45,12 @@ export class CourseComponent implements OnInit, OnDestroy {
       ).subscribe();
   }
 
-  public openDialog(student: Student): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '360px',
+  public removeStudentDialog(student: Student): void {
+    const dialogRef = this.dialog.open(RemoveDialogComponent, {
+      width: '440px',
       data: {
-        student
+        entityType: 'student',
+        message: `${student.firstName} ${student.lastName}`
       }
     });
 
