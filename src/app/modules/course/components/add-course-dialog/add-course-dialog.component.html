@@ -1,1 +1,19 @@
-<p>add-course-dialog works!</p>
+<h1 mat-dialog-title>Add new course</h1>
+<h3>Fill out the form below and add a new student to the database.</h3>
+<div mat-dialog-content>
+  <form class="form" name="addCourseForm" [formGroup]="addCourseForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Course Name</mat-label>
+      <input matInput [formControl]="nameFormControl" placeholder="Course Name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Course Date</mat-label>
+      <input matInput [formControl]="dateFormControl" placeholder="Course Date" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="primary" class="add-student-btn" (click)="onYesClick()"
+    [disabled]="addCourseForm.invalid">Add Course</button>
+</div>
