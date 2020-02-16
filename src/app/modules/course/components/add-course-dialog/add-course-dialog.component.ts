@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Course } from './../../../../models/course.model';
 
 @Component({
   selector: 'app-add-course-dialog',
@@ -17,9 +18,11 @@ export class AddCourseDialogComponent implements OnInit {
     date: this.dateFormControl
   });
 
+  public minDate = new Date();
+
   constructor(
     public dialogRef: MatDialogRef<AddCourseDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {
+    @Inject(MAT_DIALOG_DATA) public data: Course) {
   }
 
   ngOnInit(): void {
