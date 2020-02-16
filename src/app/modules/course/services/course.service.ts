@@ -39,11 +39,6 @@ export class CourseService {
     return this.httpClient.get<CourseStudent[]>(url);
   }
 
-  // public getAllStudents(): Observable<Student[]> {
-  //   const url = `${this.baseUrl}/students`;
-  //   return this.httpClient.get<Student[]>(url);
-  // }
-
   public getAllStudents(): Observable<StudentWithCourses[]> {
     const url = `${this.baseUrl}/students`;
     return this.httpClient.get<Student[]>(url)
