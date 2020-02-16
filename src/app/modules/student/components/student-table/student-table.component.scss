@@ -1,0 +1,33 @@
+@import "variables";
+
+table.mat-table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: $box-shadow-alt-2;
+
+  .mat-header-row {
+    background: $alt-background;
+
+    .mat-header-cell {
+      color: $dark-theme-black;
+    }
+  }
+
+  .mat-row {
+    &:hover {
+      background: $alt-background;
+    }
+  }
+}
+
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0 1rem;
+}
+
+.course-count-container {
+  text-align: center;
+  font-weight: 500;
+}

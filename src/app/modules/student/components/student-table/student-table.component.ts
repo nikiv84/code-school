@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { StudentWithCourses } from './../../../../models/student.model';
 
 @Component({
   selector: 'app-student-table',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-table.component.scss']
 })
 export class StudentTableComponent implements OnInit {
+  @Input() students: StudentWithCourses[];
+  public displayedStudentColumns: string[] = ['Position', 'First Name', 'Last Name', 'E-mail', 'Phone', 'Courses'];
 
   constructor() { }
 
