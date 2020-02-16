@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Edit course data: <br> <strong>{{data.name}}</strong></h1>
+<div mat-dialog-content>
+  <form class="form" name="editCourseForm" [formGroup]="editCourseForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Course Name</mat-label>
+      <input matInput [formControl]="nameFormControl" placeholder="Course Name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Course Date</mat-label>
+      <input matInput [formControl]="dateFormControl" placeholder="Course Date" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="primary" class="add-student-btn" (click)="onYesClick()"
+    [disabled]="editCourseForm.untouched || editCourseForm.invalid">Save</button>
+</div>

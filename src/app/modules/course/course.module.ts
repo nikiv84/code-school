@@ -7,6 +7,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { CourseRoutingModule } from './course-routing.module';
 import { CoursesComponent } from './components/courses/courses.component';
 import { CoursesTableComponent } from './components/courses-table/courses-table.component';
+import { EditCourseDialogComponent } from './components/edit-course-dialog/edit-course-dialog.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CoursesTableComponent } from './components/courses-table/courses-table.
     CourseTableComponent,
     DialogComponent,
     CoursesComponent,
-    CoursesTableComponent
+    CoursesTableComponent,
+    EditCourseDialogComponent
   ],
   imports: [
     CommonModule,
