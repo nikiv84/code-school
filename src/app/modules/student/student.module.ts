@@ -6,6 +6,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { StudentTableComponent } from './components/student-table/student-table.component';
 import { StudentComponent } from './components/student/student.component';
 import { StudentRoutingModule } from './student-routing.module';
+import { EditStudentDialogComponent } from './components/edit-student-dialog/edit-student-dialog.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { StudentRoutingModule } from './student-routing.module';
     StudentTableComponent,
     DialogComponent,
     AddStudentDialogComponent,
+    EditStudentDialogComponent
   ],
   imports: [
     CommonModule,
