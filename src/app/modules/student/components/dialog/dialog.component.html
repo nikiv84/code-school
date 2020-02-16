@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Are you sure you want to remove student?</h1>
+<div mat-dialog-content>
+  <h3>You are about to permanently delete <strong><em>{{data.student.firstName}}
+        {{data.student.lastName}}</em>.</strong>
+  </h3>
+  <p><strong>This cannot be undone!</strong></p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button mat-button [mat-dialog-close]="data.student" cdkFocusInitial (click)="onYesClick()">Yes, I'm
+    sure</button>
+</div>

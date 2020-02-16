@@ -11,6 +11,7 @@ import { StudentRoutingModule } from './student-routing.module';
   declarations: [
     StudentComponent,
     StudentTableComponent,
+    DialogComponent,
     AddStudentDialogComponent,
   ],
   imports: [
@@ -20,6 +21,7 @@ import { StudentRoutingModule } from './student-routing.module';
   ],
   entryComponents: [
     AddStudentDialogComponent,
+    DialogComponent
   ]
 })
 export class StudentModule { }
