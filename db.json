@@ -33,17 +33,17 @@
     {
       "id": 101,
       "name": "React 101",
-      "date": "2020-02-24T00:00:00Z"
+      "date": "2020-02-24"
     },
     {
       "id": 201,
       "name": "Angular 101",
-      "date": "2020-03-13T00:00:00Z"
+      "date": "2020-03-13"
     },
     {
       "id": 301,
       "name": "Java Spring 101",
-      "date": "2020-03-21T00:00:00Z"
+      "date": "2020-03-21"
     }
   ],
   "enrollment": [
@@ -85,7 +85,7 @@
     {
       "id": 8,
       "studentId": 3,
-      "courseId": 201
+      "courseId": 101
     }
   ]
 }
