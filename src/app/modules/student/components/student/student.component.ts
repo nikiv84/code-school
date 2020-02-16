@@ -82,7 +82,7 @@ export class StudentComponent implements OnInit, OnDestroy {
     });
   }
 
-  public openDialog(student: Student): void {
+  public removeStudentDialog(student: Student): void {
     const dialogRef = this.dialog.open(RemoveDialogComponent, {
       width: '440px',
       data: {
@@ -96,6 +96,11 @@ export class StudentComponent implements OnInit, OnDestroy {
         this.removeStudent(student.id);
       }
     });
+  }
+
+  public getSubtitle(students: StudentWithCourses[]): string {
+    const numOfStudents = students?.length ? students?.length : 0;
+    return numOfStudents === 1 ? `${numOfStudents} student` : `${numOfStudents} students`;
   }
 
 }

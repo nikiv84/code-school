@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-12">
     <h1 class="main-title">Students</h1>
-    <h2 class="sub-title">{{(students$ | async)?.length}} students</h2>
+    <h2 class="sub-title">{{getSubtitle((students$ | async))}}</h2>
   </div>
 </div>
 <div class="row">
   <div class="col-12">
     <button mat-raised-button color="primary" (click)="addStudentDialog()" class="add-student-btn">Add Student</button>
-    <app-student-table [students]="students$ | async" (removeStudent)="openDialog($event)"
+    <app-student-table [students]="students$ | async" (removeStudent)="removeStudentDialog($event)"
       (editStudent)="editStudentDialog($event)" *ngIf="(students$ | async); else loading;">
     </app-student-table>
   </div>
