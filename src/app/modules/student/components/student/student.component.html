@@ -1,1 +1,11 @@
-<p>student works!</p>
+<div class="row">
+  <div class="col-12">
+    <h1 class="main-title">Students</h1>
+    <h2 class="sub-title">{{(students$ | async)?.length}} students</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <app-student-table [students]="students$ | async"></app-student-table>
+  </div>
+</div>
