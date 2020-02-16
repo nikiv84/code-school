@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { mergeAll, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
+import { mergeAll, switchMap, tap } from 'rxjs/operators';
 import { CourseStudent } from './../../../models/course-student.model';
 import { Course } from './../../../models/course.model';
 import { Student } from './../../../models/student.model';
@@ -11,8 +11,13 @@ import { Student } from './../../../models/student.model';
 })
 export class CourseService {
   private baseUrl = 'http://localhost:3000';
+  private students$ = new BehaviorSubject<Student[]>(null);
 
   constructor(private httpClient: HttpClient) { }
+
+  public getStudentsAsObservable(): Observable<Student[]> {
+    return this.students$.asObservable();
+  }
 
   public getCourse(courseId: string): Observable<Course> {
     const url = `${this.baseUrl}/courses/${courseId}`;
@@ -31,9 +36,20 @@ export class CourseService {
 
   private getEnrollment(courseId: string, studentId: string): Observable<CourseStudent> {
     const url = `${this.baseUrl}/enrollment?studentId=${studentId}&courseId=${courseId}`;
-    return this.httpClient.get(url)
+    return this.httpClient.get<CourseStudent[]>(url)
       .pipe(
         mergeAll()
+      );
+  }
+
+  public getCourseStudents(courseId: string): Observable<Student[]> {
+    return this.getEnrollmentForCourse(courseId)
+      .pipe(
+        switchMap((enrollments: CourseStudent[]) => {
+          return !enrollments.length ? of([]) : forkJoin(enrollments.map((enrollment: CourseStudent) =>
+            this.getStudent(enrollment.studentId)));
+        }),
+        tap((students: Student[]) => this.students$.next(students)),
       );
   }
 
@@ -42,7 +58,7 @@ export class CourseService {
       .pipe(
         switchMap((enrollment: CourseStudent) => {
           const deleteUrl = `${this.baseUrl}/enrollment/${enrollment.id}`;
-          return this.httpClient.delete(deleteUrl);
+          return this.httpClient.delete<CourseStudent>(deleteUrl);
         })
       );
   }
