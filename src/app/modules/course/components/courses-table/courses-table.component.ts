@@ -16,7 +16,6 @@ export class CoursesTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.courses)
   }
 
   public onRemoveStudent(course: Course): void {

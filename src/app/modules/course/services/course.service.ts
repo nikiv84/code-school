@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
-import { mergeAll, switchMap, tap } from 'rxjs/operators';
+import { map, mergeAll, switchMap, tap } from 'rxjs/operators';
 import { CourseStudent } from './../../../models/course-student.model';
-import { Course } from './../../../models/course.model';
+import { Course, CourseWithStudents } from './../../../models/course.model';
 import { Student } from './../../../models/student.model';
 
 @Injectable({
@@ -12,6 +12,7 @@ import { Student } from './../../../models/student.model';
 export class CourseService {
   private baseUrl = 'http://localhost:3000';
   private students$ = new BehaviorSubject<Student[]>(null);
+  private courses$ = new BehaviorSubject<CourseWithStudents[]>(null);
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,9 +20,18 @@ export class CourseService {
     return this.students$.asObservable();
   }
 
+  public getCoursesAsObservable(): Observable<CourseWithStudents[]> {
+    return this.courses$.asObservable();
+  }
+
   public getCourse(courseId: string): Observable<Course> {
     const url = `${this.baseUrl}/courses/${courseId}`;
     return this.httpClient.get<Course>(url);
+  }
+
+  public getCourses(): Observable<Course[]> {
+    const url = `${this.baseUrl}/courses`;
+    return this.httpClient.get<Course[]>(url);
   }
 
   public getEnrollmentForCourse(courseId: string): Observable<CourseStudent[]> {
@@ -42,6 +52,14 @@ export class CourseService {
       );
   }
 
+  private getCourseAttendance(courseId: string): Observable<number> {
+    const url = `${this.baseUrl}/enrollment?courseId=${courseId}`;
+    return this.httpClient.get<CourseStudent[]>(url)
+      .pipe(
+        map((courseStudent: CourseStudent[]) => courseStudent.length)
+      );
+  }
+
   public getCourseStudents(courseId: string): Observable<Student[]> {
     return this.getEnrollmentForCourse(courseId)
       .pipe(
@@ -50,6 +68,22 @@ export class CourseService {
             this.getStudent(enrollment.studentId)));
         }),
         tap((students: Student[]) => this.students$.next(students)),
+      );
+  }
+
+  public getCoursesWithStudents(): Observable<any> {
+    return this.getCourses()
+      .pipe(
+        switchMap((courses: Course[]) => {
+          return !courses.length ? of([]) : forkJoin(courses.map((course: Course) =>
+            this.getCourseAttendance(course.id)))
+            .pipe(
+              map((courseAttendance: number[]) =>
+                courses.map((course: Course, index: number) =>
+                  new CourseWithStudents(course.id, course.name, course.date, courseAttendance[index])))
+            );
+        }),
+        tap((courses: CourseWithStudents[]) => this.courses$.next(courses)),
       );
   }
 

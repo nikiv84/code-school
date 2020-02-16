@@ -1,1 +1,16 @@
-<p>courses works!</p>
+<div class="row">
+  <div class="col-12">
+    <h1 class="main-title">Courses</h1>
+    <h2 class="sub-title">{{(courses$ | async)?.length || "..."}} courses</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <app-courses-table [courses]="courses$ | async" *ngIf="(courses$ | async); else loading;">
+    </app-courses-table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>

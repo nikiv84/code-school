@@ -1,0 +1,23 @@
+@import "variables";
+
+.main-title {
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  font-size: 3rem;
+  margin: 2rem 0 0.5rem 0;
+  color: $dark-theme-black;
+}
+
+.sub-title {
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  font-size: 1.25rem;
+  margin: 0.5rem 0 2rem 0;
+  color: $dark-theme-top;
+  padding-left: 2px;
+}
+
+.add-student-btn {
+  margin-bottom: 1rem;
+  background-color: $pacific-blue;
+}
