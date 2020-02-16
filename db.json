@@ -44,6 +44,11 @@
       "id": 301,
       "name": "Java Spring 101",
       "date": "2020-03-21"
+    },
+    {
+      "name": "Intro to Ruby",
+      "date": "2020-02-28T23:00:00.000Z",
+      "id": 302
     }
   ],
   "enrollment": [
@@ -86,6 +91,11 @@
       "id": 8,
       "studentId": 3,
       "courseId": 101
+    },
+    {
+      "courseId": 302,
+      "studentId": 3,
+      "id": 9
     }
   ]
 }
