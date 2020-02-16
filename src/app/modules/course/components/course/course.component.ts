@@ -93,7 +93,8 @@ export class CourseComponent implements OnInit, OnDestroy {
       data: {
         name: course.name,
         date: course.date,
-        students: this.studentsNotEnrolled
+        students: this.studentsNotEnrolled,
+        numOfEnrolledStudents: this.courseStudents.length
       }
     });
 
