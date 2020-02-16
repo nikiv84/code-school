@@ -1,27 +1,30 @@
 # CodeSchool
+![No more Tabs](/src/assets/img/logo.svg)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+CodeSchool is courses and students managment app, develeped using Angular.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Use the package manager [npm](https://www.npmjs.com/) to install WizardApp.
 
-## Code scaffolding
+```
+$ npm install
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Starting the app
 
-## Build
+Run `npm run start:dev` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+There are also independent scripts for running server: `npm run server:dev` and client: `npm run app:dev`
 
-## Running unit tests
+## Contributing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## Running end-to-end tests
+## Author
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+[Ivan Nikolic](http://www.ivan-nikolic.com)
 
-## Further help
+## License
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+[MIT](https://choosealicense.com/licenses/mit/)
