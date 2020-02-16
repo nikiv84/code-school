@@ -6,13 +6,15 @@ import { CourseComponent } from './components/course/course.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { CourseRoutingModule } from './course-routing.module';
 import { CoursesComponent } from './components/courses/courses.component';
+import { CoursesTableComponent } from './components/courses-table/courses-table.component';
 
 @NgModule({
   declarations: [
     CourseComponent,
     CourseTableComponent,
     DialogComponent,
-    CoursesComponent
+    CoursesComponent,
+    CoursesTableComponent
   ],
   imports: [
     CommonModule,
