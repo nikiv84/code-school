@@ -1,0 +1,17 @@
+@import "variables";
+
+.main-title {
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  font-size: 3rem;
+  margin: 2rem 0 0.5rem 0;
+  color: $dark-theme-black;
+}
+
+.sub-title {
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  font-size: 1.5rem;
+  margin: 0.5rem 0 2rem 0;
+  color: $dark-theme-black;
+}

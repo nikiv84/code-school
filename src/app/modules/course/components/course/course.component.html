@@ -1,1 +1,12 @@
-<p>course works!</p>
+<div class="row">
+  <div class="col-12">
+    <h1 class="main-title">{{course?.name}}</h1>
+    <h2 class="sub-title">{{course?.date | date}}</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <app-course-table [students]="students$ | async" (removeStudent)="openDialog($event)">
+    </app-course-table>
+  </div>
+</div>
