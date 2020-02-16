@@ -18,11 +18,11 @@ export class CoursesTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onRemoveStudent(course: Course): void {
+  public onRemoveCourse(course: Course): void {
     this.removeCourse.emit(course);
   }
 
-  public onEditStudent(course: Course): void {
+  public onEditCourse(course: Course): void {
     this.editCourse.emit(course);
   }
 
