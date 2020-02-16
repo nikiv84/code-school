@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
@@ -14,10 +15,17 @@ export interface DialogData {
   styleUrls: ['./add-student-dialog.component.scss']
 })
 export class AddStudentDialogComponent implements OnInit {
-  public firstName: string;
-  public lastName: string;
-  public email: string;
-  public phone: string;
+  public emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  public firstnameFormControl = new FormControl('', [Validators.required]);
+  public lastnameFormControl = new FormControl('', [Validators.required]);
+  public phoneFormControl = new FormControl('');
+
+  public addStudentForm: FormGroup = new FormGroup({
+    email: this.emailFormControl,
+    firstname: this.firstnameFormControl,
+    lastname: this.lastnameFormControl,
+    phone: this.phoneFormControl
+  });
 
   constructor(
     public dialogRef: MatDialogRef<AddStudentDialogComponent>,
@@ -31,13 +39,15 @@ export class AddStudentDialogComponent implements OnInit {
   }
 
   public onYesClick(): void {
-    const student = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      phone: this.phone
-    };
-    this.dialogRef.close(student);
+    if (this.addStudentForm.valid) {
+      const student = {
+        firstName: this.firstnameFormControl.value,
+        lastName: this.lastnameFormControl.value,
+        email: this.emailFormControl.value,
+        phone: this.phoneFormControl.value
+      };
+      this.dialogRef.close(student);
+    }
   }
 
 }

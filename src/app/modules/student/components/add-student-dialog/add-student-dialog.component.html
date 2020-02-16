@@ -1,23 +1,27 @@
-<h1 mat-dialog-title>Add student</h1>
+<h1 mat-dialog-title>Add new student</h1>
+<h3>Fill out the form below and add a new student to the database.</h3>
 <div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="firstName" placeholder="First Name">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="lastName" placeholder="Last Name">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>E-mail</mat-label>
-    <input matInput [(ngModel)]="email" type="email" placeholder="E-mail">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Phone</mat-label>
-    <input matInput [(ngModel)]="phone" placeholder="Phone">
-  </mat-form-field>
+  <form class="form" name="addStudentForm" [formGroup]="addStudentForm">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput [formControl]="firstnameFormControl" placeholder="First Name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput [formControl]="lastnameFormControl" placeholder="Last Name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput [formControl]="emailFormControl" type="email" placeholder="E-mail" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput [formControl]="phoneFormControl" placeholder="Phone">
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button cdkFocusInitial (click)="onYesClick()">Add Student</button>
+  <button mat-stroked-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="primary" class="add-student-btn" (click)="onYesClick()"
+    [disabled]="addStudentForm.invalid">Add Student</button>
 </div>
