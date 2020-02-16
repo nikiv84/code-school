@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Add student</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="firstName" placeholder="First Name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="lastName" placeholder="Last Name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>E-mail</mat-label>
+    <input matInput [(ngModel)]="email" type="email" placeholder="E-mail">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Phone</mat-label>
+    <input matInput [(ngModel)]="phone" placeholder="Phone">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="onYesClick()">Add Student</button>
+</div>
