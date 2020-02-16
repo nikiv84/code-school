@@ -6,8 +6,6 @@
 <div class="row dashboard-container" *ngIf="(courses$ | async) as courses; else loading;">
   <app-course-card *ngFor="let course of courses" [course]="course" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
   </app-course-card>
-  <app-course-card *ngFor="let course of courses" [course]="course" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-  </app-course-card>
 </div>
 
 <ng-template #loading>
