@@ -37,11 +37,9 @@ export class EditStudentDialogComponent implements OnInit {
     this.setFormValues();
   }
 
-  setFormValues() {
-    this.editStudentForm.controls['firstName'].setValue(this.data.firstName);
-    this.editStudentForm.controls['lastName'].setValue(this.data.lastName);
-    this.editStudentForm.controls['email'].setValue(this.data.email);
-    this.editStudentForm.controls['phone'].setValue(this.data.phone);
+  private setFormValues(): void {
+    Object.entries(this.data).forEach(([key, value]: string[]) =>
+      this.editStudentForm.controls[key].setValue(value));
   }
 
   public onNoClick(): void {
