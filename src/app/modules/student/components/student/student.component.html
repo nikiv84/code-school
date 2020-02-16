@@ -6,6 +6,13 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <app-student-table [students]="students$ | async"></app-student-table>
+    <button mat-raised-button color="primary" (click)="addStudentDialog()" class="add-student-btn">Add Student</button>
+    <app-student-table [students]="students$ | async" (removeStudent)="openDialog($event)"
+      (editStudent)="editStudentDialog($event)" *ngIf="(students$ | async); else loading;">
+    </app-student-table>
   </div>
 </div>
+
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
