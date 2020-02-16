@@ -1,0 +1,11 @@
+@import "variables";
+
+.message-container {
+  background: $brand-highlight-light-theme;
+  padding: 1rem;
+  width: 420px;
+  text-align: center;
+  color: $white;
+  border-radius: 5px;
+  box-shadow: $box-shadow-default;
+}

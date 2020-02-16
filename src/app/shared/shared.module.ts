@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MessageComponent } from './components/message/message.component';
 import { MaterialModule } from './material.module';
 
 @NgModule({
-  declarations: [],
+    MessageComponent
   imports: [
     CommonModule
   ],
   exports: [
-    MaterialModule
+    MessageComponent,
+    FormsModule
   ]
 })
 export class SharedModule { }
