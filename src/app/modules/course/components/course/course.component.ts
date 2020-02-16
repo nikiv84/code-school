@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { CourseStudent } from './../../../../models/course-student.model';
+import { Observable, Subject } from 'rxjs';
+import { concatMap, takeUntil } from 'rxjs/operators';
 import { Course } from './../../../../models/course.model';
 import { Student } from './../../../../models/student.model';
 import { CourseService } from './../../services/course.service';
@@ -14,10 +13,11 @@ import { DialogComponent } from './../dialog/dialog.component';
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss']
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent implements OnInit, OnDestroy {
   private courseId: string;
   public students$: Observable<Student[]>;
-  public course: Course;
+  public course$: Observable<Course>;
+  private unsubscribe: Subject<void> = new Subject();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,28 +27,22 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('courseId');
-    this.students$ = this.getCourseData();
+    this.course$ = this.courseService.getCourse(this.courseId);
+    this.students$ = this.courseService.getStudentsAsObservable();
+    this.courseService.getCourseStudents(this.courseId).pipe(takeUntil(this.unsubscribe)).subscribe();
   }
 
-  private getCourseData(): Observable<Student[]> {
-    return this.courseService.getCourse(this.courseId)
-      .pipe(
-        switchMap((course: Course) => {
-          this.course = course;
-          return this.courseService.getEnrollmentForCourse(this.courseId)
-            .pipe(
-              switchMap((enrollments: CourseStudent[]) =>
-                forkJoin(enrollments.map((enrollment: CourseStudent) => this.courseService.getStudent(enrollment.studentId))))
-            );
-        })
-      );
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
-  public removeStudentFromCourse(studentId: string) {
-    this.students$ = this.courseService.removeStudentFromCourse(this.courseId, studentId)
+  private removeStudentFromCourse(studentId: string) {
+    this.courseService.removeStudentFromCourse(this.courseId, studentId)
       .pipe(
-        switchMap(() => this.getCourseData())
-      );
+        takeUntil(this.unsubscribe),
+        concatMap(() => this.courseService.getCourseStudents(this.courseId))
+      ).subscribe();
   }
 
   public openDialog(student: Student): void {

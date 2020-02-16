@@ -1,12 +1,17 @@
 <div class="row">
   <div class="col-12">
-    <h1 class="main-title">{{course?.name}}</h1>
-    <h2 class="sub-title">{{course?.date | date}}</h2>
+    <h1 class="main-title">{{(course$ | async)?.name}}</h1>
+    <h2 class="sub-title">{{(course$ | async)?.date | date}}</h2>
   </div>
 </div>
 <div class="row">
   <div class="col-12">
-    <app-course-table [students]="students$ | async" (removeStudent)="openDialog($event)">
+    <app-course-table [students]="students$ | async" (removeStudent)="openDialog($event)"
+      *ngIf="(students$ | async); else loading;">
     </app-course-table>
   </div>
 </div>
+
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
