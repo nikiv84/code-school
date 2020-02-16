@@ -1,15 +1,21 @@
-<h1 mat-dialog-title>Add Student to course: <br> <strong>{{data.name}}</strong></h1>
+<h1 mat-dialog-title>Add students to course: <br> <strong>{{data.name}}</strong></h1>
 <h3>{{data.date | date}}</h3>
 <div mat-dialog-content>
-  <mat-selection-list #students>
-    <mat-list-option *ngFor="let student of data.students" [value]="student.id">
-      {{student.firstName}}
-    </mat-list-option>
+  <mat-selection-list #students (selectionChange)="onGroupsChange(students.selectedOptions.selected)">
+    <ng-container *ngIf="data.students?.length; else noStudents;">
+      <mat-list-option *ngFor="let student of data.students" [value]="student.id">
+        {{student.firstName}}
+      </mat-list-option>
+    </ng-container>
   </mat-selection-list>
 </div>
 <div mat-dialog-actions>
   <button mat-stroked-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
   <button mat-raised-button color="primary" class="add-student-btn"
-    (click)="onYesClick(students.selectedOptions.selected)">Add
-    Student</button>
+    (click)="onYesClick(students.selectedOptions.selected)"
+    [disabled]="!data.students?.length || !selectedStudentIds?.length">Add Student(s)</button>
 </div>
+
+<ng-template #noStudents>
+  <h3><strong>There are no students you can add to this course</strong></h3>
+</ng-template>
