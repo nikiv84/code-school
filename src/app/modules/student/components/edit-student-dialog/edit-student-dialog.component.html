@@ -1,23 +1,26 @@
 <h1 mat-dialog-title>Edit student data: <br> <strong>{{data.firstName}} {{data.lastName}}</strong></h1>
 <div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="data.firstName" placeholder="First Name">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="data.lastName" placeholder="Last Name">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>E-mail</mat-label>
-    <input matInput [(ngModel)]="data.email" type="email" placeholder="E-mail">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Phone</mat-label>
-    <input matInput [(ngModel)]="data.phone" placeholder="Phone">
-  </mat-form-field>
+  <form class="form" name="editStudentForm" [formGroup]="editStudentForm">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput [formControl]="firstnameFormControl" placeholder="First Name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput [formControl]="lastnameFormControl" placeholder="Last Name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput [formControl]="emailFormControl" type="email" placeholder="E-mail" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput [formControl]="phoneFormControl" placeholder="Phone">
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button cdkFocusInitial (click)="onYesClick()">Save</button>
+  <button mat-stroked-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="primary" class="add-student-btn" (click)="onYesClick()"
+    [disabled]="editStudentForm.untouched || editStudentForm.invalid">Save</button>
 </div>
